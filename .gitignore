@@ -1,0 +1,6 @@
+.env
+*.env
+*.secret
+*.local
+auth-config.yaml
+auth-secrets.yaml
