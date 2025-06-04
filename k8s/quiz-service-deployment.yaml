@@ -36,3 +36,8 @@ spec:
                 configMapKeyRef:
                   name: quiz-config
                   key: AUTH_SERVICE_URL
+          resources:
+            requests:
+              cpu: 100m
+            limits:
+              cpu: 500m
