@@ -1,21 +1,5 @@
 const Quiz = require('../models/Quiz');
 const { validationResult } = require('express-validator');
-const fetch = require('node-fetch');
-
-exports.getTags = async (req, res, next) => {
-  try {
-    const response = await fetch('http://tag-service:5001/api/tag');
-    const tags = await response.json();
-    res.json(tags);
-  } catch (err) {
-    next(err);
-  }
-};
-
-exports.getUser = async (userId) => {
-  const response = await fetch(`http://user-service:5002/api/user/${userId}`);
-  return await response.json();
-};
 
 exports.createQuiz = async (req, res, next) => {
   const errors = validationResult(req);
@@ -171,7 +155,7 @@ exports.getQuizPoints = async (req, res, next) => {
 
 exports.getPublicQuizzes = async (req, res, next) => {
   try {
-    const { category, difficulty, search, page = 1, limit = 10 } = req.query;
+    const { category, difficulty, search, page = 1, limit = 10, tags } = req.query;
     const query = { isPrivate: false };
 
     if (search) {
@@ -182,6 +166,10 @@ exports.getPublicQuizzes = async (req, res, next) => {
     }
     if (difficulty) {
       query.difficulty = difficulty;
+    }
+    if (tags) {
+      const tagArray = tags.split(',').map((tag) => tag.trim());
+      query.tags = { $all: tagArray };
     }
 
     const quizzes = await Quiz.find(query)

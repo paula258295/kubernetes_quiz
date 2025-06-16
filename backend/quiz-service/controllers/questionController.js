@@ -18,19 +18,6 @@ exports.createQuestion = async (req, res, next) => {
   }
 };
 
-exports.updateQuestion = async (req, res, next) => {
-  try {
-    const question = await Question.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    if (!question)
-      return res.status(404).json({ message: 'Question not found' });
-    res.json({ message: 'Question updated', question });
-  } catch (err) {
-    next(err);
-  }
-};
-
 exports.deleteQuestion = async (req, res, next) => {
   try {
     const question = await Question.findByIdAndDelete(req.params.id);
@@ -72,15 +59,6 @@ exports.updateQuestion = async (req, res, next) => {
     Object.assign(question, req.body);
     await question.save();
     res.json(question);
-  } catch (err) {
-    next(err);
-  }
-};
-
-exports.deleteQuestion = async (req, res, next) => {
-  try {
-    await Question.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Question deleted' });
   } catch (err) {
     next(err);
   }

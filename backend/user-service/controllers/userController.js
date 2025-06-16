@@ -126,15 +126,6 @@ exports.getMyStats = async (req, res, next) => {
   }
 };
 
-exports.getAllUsers = async (req, res, next) => {
-  try {
-    const users = await User.find().select('-password');
-    res.json(users);
-  } catch (err) {
-    next(err);
-  }
-};
-
 exports.getUserById = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id);

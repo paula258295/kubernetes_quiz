@@ -168,7 +168,6 @@ function App() {
               <Route path="/reset-password" element={<ResetPasswordRequestPage />} />
               <Route path="/reset-password/confirm" element={<ResetPasswordConfirmPage />} />
 
-              <Route path="/social-login" element={<SocialLoginPage />} />
             </>
           )}
           {loggedIn && (
@@ -179,6 +178,7 @@ function App() {
               )}
             </>
           )}
+          <Route path="/social-login" element={<SocialLoginPage setLoggedIn={setLoggedIn} />} />
           <Route
             path="/"
             element={

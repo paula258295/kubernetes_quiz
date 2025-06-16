@@ -50,17 +50,4 @@ connectDB().then(() => {
   app.listen(PORT, () => console.log(`Quiz Service running on port ${PORT}`));
 });
 
-
-// do testow
-// const PORT = process.env.PORT || 5000;
-// const startServer = () => {
-//   connectDB().then(() => {
-//     app.listen(PORT, () => console.log(`Quiz Service running on port ${PORT}`));
-//   });
-// };
-
-// if (require.main === module) {
-//   startServer();
-// }
-
-// module.exports = app;
+module.exports = app;
